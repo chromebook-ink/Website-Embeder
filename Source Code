@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Website Embedder</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #121212;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      
+      h1 {
+        color: #fff;
+        text-align: center;
+        margin: 20px 0;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #1f1f1f;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+      
+      input[type="text"] {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        background-color: #2e2e2e;
+        color: #fff;
+      }
+      
+      input[type="text"]::placeholder {
+        color: #b3b3b3;
+      }
+      
+      button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-right: 10px;
+      }
+      
+      button:hover {
+        background-color: #3e8e41;
+      }
+      
+      .embed-container {
+        position: relative;
+        overflow: hidden;
+        padding-top: 56.25%;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+      
+      .embed-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      .fullscreen-button {
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+      }
+
+      .fullscreen-button:hover {
+        background-color: #3e8e41;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Website Embedder</h1>
+      <div>
+        <input type="text" id="url-input" placeholder="Enter the URL of the website you want to embed">
+        <button onclick="embed()">Embed</button>
+        <button class="fullscreen-button" id="fullscreen-button" onclick="toggleFullscreen()">Full Screen</button>
+      </div>
+      <div class="embed-container" id="embed-container"></div>
+    </div>
+
+    <script>
+      function embed() {
+        var url = document.getElementById("url-input").value;
+        var embedContainer = document.getElementById("embed-container");
+        
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+          embedContainer.innerHTML = '<iframe src="' + url + '"></iframe>';
+          document.getElementById("fullscreen-button").disabled = false;
+        } else {
+          alert("Please enter a valid URL starting with 'http://' or 'https://'");
+        }
+      }
+
+      function toggleFullscreen() {
+        var iframe = document.querySelector('.embed-container iframe');
+        if (!document.fullscreenElement) {
+          iframe.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      }
+    </script>
+  </body>
+</html>
